@@ -27,8 +27,8 @@ Este repositorio contiene la solucion a 3 problemas planteados
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
-   cd tu_repositorio
+   git clone https://github.com/santiago-henao061/prueba-tecnica-python.git
+   cd prueba-tecnica-python
    ```
 
 2. Crea y activa un entorno virtual en la carpeta principal PRUEBA TECNICA:
