@@ -69,8 +69,5 @@ python modulo_ejercicio3\ejercicio3.py
 ## Autor
 
 - Santiago Henao Otalora
-- [Tu LinkedIn o GitHub opcional]
+- https://www.linkedin.com/in/santiago-henao-otalora-698804259/
 
-## Licencia
-
-Este proyecto está bajo la Licencia MIT.
