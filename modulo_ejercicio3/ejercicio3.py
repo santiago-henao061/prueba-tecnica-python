@@ -16,6 +16,7 @@ from dash.exceptions import PreventUpdate
 from dash import Dash, Output, Input, html, callback,State,no_update
 from dash_iconify import DashIconify
 import dash
+#traemos las funciones de validar_usuario e iniciar_base para el funcionamiento del sql
 from backend_conexion_sql import validar_usuario, inicializar_base
 
 inicializar_base()
@@ -25,6 +26,7 @@ dash._dash_renderer._set_react_version("18.2.0")
 app = Dash()
 
 app.title = "Ejercicio Login con bases de datos"
+#parte visual de la pagina
 app.layout = dmc.MantineProvider(
     children=[
         dmc.NotificationProvider(),
@@ -39,25 +41,35 @@ app.layout = dmc.MantineProvider(
             id="contenido_dinamico_principal",
             children=[
                 dmc.Title("Iniciar sesión", order=1),
+                #input del usuario a ingresar
                 dmc.TextInput(id="usuario", label="Usuario", placeholder="Ingresa tu nombre de usuario",w="50%"),
+                #input de la contrasena a usar
                 dmc.PasswordInput(id="contrasena", label="Contraseña", placeholder="Ingresa tu contraseña",w="50%"),
                 dmc.Button("Login",id="btn_continuar",n_clicks=0,w="10%",variant="gradient",gradient={"from": "red", "to": "pink"},),
             ]
         )]
 )
 
+#callback para la ejecucion del bloque 
 @callback(
+    #id donde retorna la info
     Output("contenido_dinamico_principal", "children"),
+    #id donde retorna la notificacion
     Output("espacio_notificacion", "children"),
+    #interaccion del boton para activar el callback
     Input("btn_continuar", "n_clicks"),
+    #valores del input usuario
     State("usuario", "value"),
+    #valores del input contrasena
     State("contrasena", "value"),
 )
 def validar_login(n_clicks,input_usuario,input_contraseña):
+    #si n_clicks es 0 no haga nada, nos aseguramos de que no se ejecute sin un click 
     if n_clicks == 0:
         raise PreventUpdate
-
+    #aseguramos de que si se da click tenga los campos input_usuario e input_contraseña tengan informacion
     if not input_usuario or not input_contraseña:
+        #si no tiene los campos en los input crea una notificacion y la muestra
         notificacion=dmc.Notification(
         title="Hace falta un campo",
         action="show",
@@ -65,12 +77,14 @@ def validar_login(n_clicks,input_usuario,input_contraseña):
         icon=DashIconify(icon="tabler:bulb-filled"),
         )  
         return no_update,notificacion
-
+    #hacemos uso de la funcion para validar si existe el usuario ingresado
     if validar_usuario(input_usuario, input_contraseña):
-        # Llamamos una API pública (ej: Rick & Morty)
+        #llamamos al api publica de rick y morty
         response = requests.get("https://rickandmortyapi.com/api/character/?page=1")
+        #si el status_code es 200 muestra la informacion por pantalla
         if response.status_code == 200:
             personajes = response.json()["results"][:5]
+            #crea una lista simple de nombres de personajes y si se encuentran vivos
             lista = [html.Div(f"{p['name']} - {p['status']}") for p in personajes]
             notificacion=dmc.Notification(
                 title="Bienvenido!!",
@@ -79,6 +93,7 @@ def validar_login(n_clicks,input_usuario,input_contraseña):
                 icon=DashIconify(icon="ic:round-celebration"),
                 ) 
             return lista,notificacion
+    #sino se encuentra el usuario arroja la notificicacion
     else:
         notificacion=dmc.Notification(
             title="Usuario no encontrado",
@@ -87,6 +102,7 @@ def validar_login(n_clicks,input_usuario,input_contraseña):
             icon=DashIconify(icon="tabler:bulb-filled"),
             ) 
         return no_update,notificacion
-        
+
+#para correr la app
 if __name__ == "__main__":
     app.run(debug=True)
