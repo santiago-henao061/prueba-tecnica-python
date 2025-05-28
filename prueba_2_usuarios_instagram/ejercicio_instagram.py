@@ -28,6 +28,14 @@ contraseña = os.getenv("INSTAGRAM_PASS")
 cuentas=["elcorteingles","mercadona","carrefoures","ejemplo_para_prueba"]
 
 def get_perfil_instagram(perfil_cuenta:str):
+    """Esta funcion realizara el ingreso a un perfil de instagram, lo descargara y podremos extraer cierta informacion requerida
+
+    Args:
+        perfil_cuenta (str): nombre del perfil al que vamos a consultar
+
+    Returns:
+        resultado (dict): este sera el resultado de la extraccion de los datos del perfil 
+    """
     try:
         #creamos una instacia de instaloader
         loader = instaloader.Instaloader()
