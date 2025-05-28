@@ -5,22 +5,28 @@ Este repositorio contiene la solucion a 3 problemas planteados
 ## Contenido
 
 1. **Ejercicio 1 - Numero mas frecuente**
-   - Encuentra el número que mas veces se repite en una lista.
+   - Encuentra el numero que mas veces se repite en una lista.
    - Si hay empate, devuelve el menor.
 
 2. **Ejercicio 2 - Web Scraping**
-   - Realiza scraping en MercadoLibre para extraer títulos y precios de productos.
+   - Realiza scraping en MercadoLibre para extraer titulos y precios de productos.
    - Permite cambiar fácilmente la variable de busqueda.
 
 3. **Ejercicio 3 - Login y Consumo de API**
    - Interfaz de login con Dash Mantine.
    - Validacion con SQLite.
-   - Muestra datos de una API pública tras login exitoso.
+   - Muestra datos de una API publica tras login exitoso.
+  
+4. **Ejercicio 4 Instagram - Scraping de Perfiles de Instagram**
+   - Extrae informacion publica de un perfil de Instagram.
+   - Detecta correos electronicos y telefonos dentro de la biografia.
+   - Obtiene la ultima fecha de publicacion (si no ha sido bloqueado por exceso de peticiones).
+   - Exporta todos los datos a un archivo Excel.
 
 ## Requisitos
 
 - Python 3.8 o superior
-- Las dependencias se listan en "requirements.txt" (solo para el modulo_ejercicio2 y modulo_ejercicio3)
+- Las dependencias se listan en "requirements.txt" (solo para el modulo_ejercicio2 y modulo_ejercicio3), SE AÑADEN dependencias para (ejercicio_instagram)
 
 ## Instalacion
 
@@ -64,6 +70,12 @@ python modulo_ejercicio2\ejercicio2.py
 
 ```bash
 python modulo_ejercicio3\ejercicio3.py
+```
+
+### 4. Scraping a Intagram
+
+```bash
+python prueba_2_usuarios_instagram\ejercicio_instagram.py
 ```
 
 ## Autor
